@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style3.css" />
+    <title>Formulario de Usuarios</title>
+</head>
+<body>
+
+    <h1>Registro de Usuarios</h1>
+
+    <form id="userForm">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="nombre" required>
+
+        <label for="last_name">Apellido:</label>
+        <input type="text" id="last_name" name="apellido" required>
+
+        <label for="age">Edad:</label>
+        <input type="number" id="age" name="edad" required>
+
+        <label>Sexo:</label> <br>
+        <label for="gender_m">Masculino</label>
+        <input type="radio" id="gender_m" name="sexo" value="Masculino" required>
+        <label for="gender_f">Femenino</label>
+        <input type="radio" id="gender_f" name="sexo" value="Femenino" required> <br>
+
+        <label for="birthday">Fecha de nacimiento:</label>
+        <input type="date" id="birthday" name="fecha_de_nacimiento" required>
+
+        <button type="submit">Agregar Usuario</button>
+    </form>
+
+    <hr>
+
+    <div id="userInfo">
+        <h2>Información de Usuarios</h2>
+        <div id="info"></div>
+    </div>
+
+    <script>
+        document.querySelector('#userForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+
+            const data = Object.fromEntries(new FormData(e.target)); // Obtiene los datos del formulario
+
+            // Crea un string con la información del usuario
+            const userInfo = `
+                <div>
+                    <strong>Nombre:</strong> ${data.nombre}<br>
+                    <strong>Apellido:</strong> ${data.apellido}<br>
+                    <strong>Edad:</strong> ${data.edad}<br>
+                    <strong>Sexo:</strong> ${data.sexo}<br>
+                    <strong>Fecha de nacimiento:</strong> ${data.fecha_de_nacimiento}
+                </div>
+                <hr>
+            `;
+
+            // Agrega la nueva información al contenedor de usuarios
+            document.getElementById('info').innerHTML += userInfo;
+            document.getElementById('userInfo').style.display = 'block'; // Muestra el div
+        });
+    </script>
+</body>
+</html>
